@@ -1,7 +1,7 @@
 # bioinformatics-scripts
 
 - [bioinformatics-scripts](#bioinformatics-scripts)
-  * [gbk2table](#gbk2table)
+  * [gbk2table.py](#gbk2table)
   
 ## gbk2table
 
