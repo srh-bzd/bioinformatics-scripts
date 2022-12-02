@@ -33,6 +33,7 @@ def parse_gbk(input_file):
         if line.startswith("LOCUS"):
             accession = line.strip().split()[1]
             length = int(line.strip().split()[2])
+            passLineAccession = False
             genbankDict[accession] = {}
             genbankDict[accession]["length"] = length
             genbankDict[accession]["definition"] = None
@@ -40,8 +41,12 @@ def parse_gbk(input_file):
             genbankDict[accession]["country"] = None
             genbankDict[accession]["source"] = None
             genbankDict[accession]["date"] = None
+        if line.startswith("ACCESSION"):
+            passLineAccession = True
         if line.startswith("DEFINITION"):
             genbankDict[accession]["definition"] = line.strip().replace("DEFINITION  ", "")
+        if genbankDict[accession]["definition"] != None and passLineAccession == False:
+            genbankDict[accession]["definition"] += line.strip().replace("DEFINITION  ", "")
         if line.startswith("   PUBMED"):
             genbankDict[accession]["pubmed"] = int(line.strip().split()[1])
         if search("country", line):
