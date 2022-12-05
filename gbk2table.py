@@ -36,16 +36,16 @@ def parse_gbk(input_file):
             passLineAccession = False
             genbankDict[accession] = {}
             genbankDict[accession]["length"] = length
-            genbankDict[accession]["definition"] = None
-            genbankDict[accession]["pubmed"] = None
-            genbankDict[accession]["country"] = None
-            genbankDict[accession]["source"] = None
-            genbankDict[accession]["date"] = None
+            genbankDict[accession]["definition"] = "NA"
+            genbankDict[accession]["pubmed"] = "NA"
+            genbankDict[accession]["country"] = "NA"
+            genbankDict[accession]["source"] = "NA"
+            genbankDict[accession]["date"] = "NA"
         if line.startswith("ACCESSION"):
             passLineAccession = True
         if line.startswith("DEFINITION"):
             genbankDict[accession]["definition"] = line.strip().replace("DEFINITION  ", "")
-        if genbankDict[accession]["definition"] != None and passLineAccession == False:
+        if genbankDict[accession]["definition"] != "NA" and passLineAccession == False:
             genbankDict[accession]["definition"] += line.strip().replace("DEFINITION  ", "")
         if line.startswith("   PUBMED"):
             genbankDict[accession]["pubmed"] = int(line.strip().split()[1])
