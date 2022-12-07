@@ -24,37 +24,35 @@ AUTHOR :
 
 def parse_gbk(input_file):
     """
-    Function to parse input Genbank file and keep some information into a dict like : {accession : {"length" : , "definition" : , ...}}
+    Function to parse input Genbank file and keep some information into a dict like : {locus : {"length" : , "definition" : , ...}}
     """
     genbankDict = dict()
-    accession = None
-    length = None
+    locus = None
     for line in input_file:
         if line.startswith("LOCUS"):
-            accession = line.strip().split()[1]
-            length = int(line.strip().split()[2])
-            passLineAccession = False
-            genbankDict[accession] = {}
-            genbankDict[accession]["length"] = length
-            genbankDict[accession]["definition"] = "NA"
-            genbankDict[accession]["pubmed"] = "NA"
-            genbankDict[accession]["country"] = "NA"
-            genbankDict[accession]["source"] = "NA"
-            genbankDict[accession]["date"] = "NA"
+            locus = line.strip().split()[1]
+            genbankDict[locus] = {}
+            genbankDict[locus]["length"] = int(line.strip().split()[2])
+            genbankDict[locus]["definition"] = "NA"
+            genbankDict[locus]["accession"] = "NA"
+            genbankDict[locus]["pubmed"] = "NA"
+            genbankDict[locus]["country"] = "NA"
+            genbankDict[locus]["source"] = "NA"
+            genbankDict[locus]["date"] = "NA"
         if line.startswith("ACCESSION"):
-            passLineAccession = True
+            genbankDict[locus]["accession"] = line.strip().split()[1]
         if line.startswith("DEFINITION"):
-            genbankDict[accession]["definition"] = line.strip().replace("DEFINITION  ", "")
-        if genbankDict[accession]["definition"] != "NA" and passLineAccession == False:
-            genbankDict[accession]["definition"] += line.strip().replace("DEFINITION  ", "")
+            genbankDict[locus]["definition"] = line.strip().replace("DEFINITION  ", "")
+        if genbankDict[locus]["definition"] != "NA" and genbankDict[locus]["accession"] == "NA":
+            genbankDict[locus]["definition"] += line.strip().replace("DEFINITION  ", "")
         if line.startswith("   PUBMED"):
-            genbankDict[accession]["pubmed"] = int(line.strip().split()[1])
+            genbankDict[locus]["pubmed"] = int(line.strip().split()[1])
         if search("country", line):
-            genbankDict[accession]["country"] = line.strip().replace("/country=","").replace('"',"").split()[0]
+            genbankDict[locus]["country"] = line.strip().replace("/country=","").replace('"',"")
         if search("_source", line):
-            genbankDict[accession]["source"] = line.strip().replace(";","").replace('"',"").split("_source=",1)[1]
+            genbankDict[locus]["source"] = line.strip().replace(";","").replace('"',"").split("_source=",1)[1]
         if search("_date", line):
-            genbankDict[accession]["date"] = line.strip().replace('"',"").split("_date=",1)[1]
+            genbankDict[locus]["date"] = line.strip().replace('"',"").split("_date=",1)[1]
     return genbankDict
 
 
@@ -63,8 +61,8 @@ def write_table(genbankDict, output_file):
     Function to return a table with all the information retrieved into stdout or a output file.
     """
     print("ACCESSION\tPUBMED\tDEFINITION\tCOUNTRY\tSOURCE\tDATE\tLENGTH", file=output_file)
-    for accession in genbankDict.keys():
-        print(accession,"\t",genbankDict[accession]["pubmed"],"\t",genbankDict[accession]["definition"],"\t",genbankDict[accession]["country"],"\t",genbankDict[accession]["source"],"\t",genbankDict[accession]["date"],"\t",genbankDict[accession]["length"], file=output_file)
+    for locus in genbankDict.keys():
+        print(genbankDict[locus]["accession"],"\t",genbankDict[locus]["pubmed"],"\t",genbankDict[locus]["definition"],"\t",genbankDict[locus]["country"],"\t",genbankDict[locus]["source"],"\t",genbankDict[locus]["date"],"\t",genbankDict[locus]["length"], file=output_file)
 
 
 
