@@ -52,7 +52,7 @@ def parse_gbk(input_file):
         if search("_source", line):
             genbankDict[locus]["source"] = line.strip().replace(";","").replace('"',"").split("_source=",1)[1]
         if search("_date", line):
-            genbankDict[locus]["date"] = line.strip().replace('"',"").split("_date=",1)[1]
+            genbankDict[locus]["date"] = line.strip().replace('"',"").split("_date=",1)[1][-4:]
     return genbankDict
 
 
