@@ -2,6 +2,7 @@
 
 - [bioinformatics-scripts](#bioinformatics-scripts)
   * [gbk2table.py](#gbk2table)
+  * [frequency_alphabet.py](#frequency_alphabet)
   
 ## gbk2table.py
 
@@ -22,12 +23,21 @@ gbk2table.py is a python script to extract some information from a genbank forma
 
 ## frequency_alphabet.py
 
-### Description
-frequency_alphabet.py is a script that allows to count for each given position of a multi-aligned FASTA file the frequency of each letter composing DNA, RNA or proteins.
-
 ### Usage
 ```
-./frequency_alphabet.py [-h] <input_file> <alphabet_type> [-o <output_file>]
+usage: frequency_alphabet.py [-h] [--output_file OUTPUT_FILE] input_file alphabet_type
+
+frequency_alphabet.py is a script that allows to count for each given position of a multi-aligned FASTA file the frequency of each letter
+composing DNA, RNA or proteins.
+
+positional arguments:
+  input_file            FASTA file with multi-alignment;
+  alphabet_type         Type of letter : aa, dna or rna;
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output_file OUTPUT_FILE, -o OUTPUT_FILE
+                        Output file with matrix of frequency. Default : stdout;
 ```
 
 ### Exemple
@@ -40,10 +50,12 @@ AATNCtTCAT
 >seq3
 AA--CGTC-T
 ```
+
 Then, you run this command in your terminal : 
 ```
 ./frequency_alphabet.py /home/workdir/example_seq_aligned.fasta dna
 ```
+
 And, this kind of result will appear in your terminal :
 ```
 POSITION	 A	T	C	G	N	a	t	c	g	-
