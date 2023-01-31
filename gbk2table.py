@@ -13,7 +13,7 @@ DESCRIPTION
     ACCESSION, PUBMED, DEFINITION, /country, /isolation_source or /note=*isolate_source, /collection_date and length in LOCUS line.
 PREREQUISITE
     - python3
-    - A genbank file
+    - A Genbank file
 AUTHOR :
     Sarah BOUZIDI - sarah.bouzidi@ird.fr
     Engineer in bioinformatics
@@ -65,11 +65,10 @@ def write_table(genbankDict, output_file):
         print(genbankDict[locus]["accession"],"\t",genbankDict[locus]["pubmed"],"\t",genbankDict[locus]["definition"],"\t",genbankDict[locus]["country"],"\t",genbankDict[locus]["source"],"\t",genbankDict[locus]["date"],"\t",genbankDict[locus]["length"], file=output_file)
 
 
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Script to extract some information from a genbank format file, produced by the NCBI site, and return a table with all the information retrieved that is : ACCESSION, PUBMED, DEFINITION, /country, /isolation_source or /note=*isolate_source, /collection_date and length in LOCUS line.")
-    parser.add_argument('genbank_file', help="Genbank file with one or more items ;", type=argparse.FileType('r'))
-    parser.add_argument('--output_file', '-o', required=False, help="Output file where to write the table. Default : stdout ;", type=argparse.FileType('w'), default=sys.stdout)
+    parser = argparse.ArgumentParser(description="gbk2table is a script to extract some information from a genbank format file, produced by the NCBI site, and return a table with all the information retrieved that is : ACCESSION, PUBMED, DEFINITION, /country, /isolation_source or /note=*isolate_source, /collection_date and length in LOCUS line.")
+    parser.add_argument('genbank_file', help="Genbank file with one or more items;", type=argparse.FileType('r'))
+    parser.add_argument('--output_file', '-o', required=False, help="Output file where to write the table. Default : stdout;", type=argparse.FileType('w'), default=sys.stdout)
     args = parser.parse_args()
     
     genbank_dict = parse_gbk(args.genbank_file)
