@@ -6,19 +6,23 @@
   
 ## gbk2table.py
 
-### Description
-gbk2table.py is a python script to extract some information from a genbank format file, produced by the NCBI site, and return a table, into stdout or an output file, with all the information retrieved that is : 
-- ACCESSION
-- PUBMED
-- DEFINITION
-- /country
-- /isolation_source or /note=*isolate_source
-- /collection_date
-- length in LOCUS line
-
 ### Usage
 ```
-./gbk2table.py [-h] [-o OUTPUT_FILE] genbank_file
+usage: gbk2table.py [-h] [--output_file OUTPUT_FILE] genbank_file
+
+gbk2table is a script to extract some information from a genbank format file, produced by the
+NCBI site, and return a table with all the information retrieved that is :
+ACCESSION, PUBMED, DEFINITION, /country, /isolation_source or
+/note=*isolate_source, /collection_date and length in LOCUS line.
+
+positional arguments:
+  genbank_file          Genbank file with one or more items ;
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output_file OUTPUT_FILE, -o OUTPUT_FILE
+                        Output file where to write the table. Default : stdout;
+
 ```
 
 ## frequency_alphabet.py
