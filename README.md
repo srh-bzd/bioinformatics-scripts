@@ -60,7 +60,7 @@ Then, you run this command in your terminal :
 ./frequency_alphabet.py /home/workdir/example_seq_aligned.fasta dna
 ```
 
-And, this kind of result will appear in your terminal :
+And, this kind of result will appear :
 ```
 POSITION	 A	T	C	G	N	a	t	c	g	-
 1 	 1.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
