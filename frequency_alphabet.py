@@ -65,7 +65,7 @@ def write_matrix(fastaDict, dictAlphabet, dictCount, output_file):
     print("POSITION\t","\t".join(dictAlphabet.keys()), file = output_file)
     for position in dictCount:
         counts = list(dictCount[position].values())
-        freq = [str(count / len(fastaDict)) for count in counts]
+        freq = [str(round(count/len(fastaDict), 4)) for count in counts]
         print(position+1, "\t","\t".join(freq), file=output_file)
 
 
