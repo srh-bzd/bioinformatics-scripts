@@ -16,7 +16,7 @@ ACCESSION, PUBMED, DEFINITION, /country, /isolation_source or
 /note=*isolate_source, /collection_date and length in LOCUS line.
 
 positional arguments:
-  genbank_file          Genbank file with one or more items ;
+  genbank_file          Genbank file with one or more items;
 
 optional arguments:
   -h, --help            show this help message and exit
