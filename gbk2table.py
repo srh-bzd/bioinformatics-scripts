@@ -28,9 +28,10 @@ def parse_gbk(input_file):
     """
     genbankDict = dict()
     locus = None
+    numberQuotMarks = None
     for line in input_file:
         if line.startswith("LOCUS"):
-            locus = line.strip().split()[1]
+            locus = line.strip().split()[1]        
             genbankDict[locus] = {}
             genbankDict[locus]["length"] = int(line.strip().split()[2])
             genbankDict[locus]["definition"] = "NA"
@@ -49,10 +50,18 @@ def parse_gbk(input_file):
             genbankDict[locus]["pubmed"] = int(line.strip().split()[1])
         if search("country", line):
             genbankDict[locus]["country"] = line.strip().replace("/country=","").replace('"',"")
-        if search("_source", line):
+        if search("isolate_source", line):
             genbankDict[locus]["source"] = line.strip().replace(";","").replace('"',"").split("_source=",1)[1]
-        if search("_date", line):
-            genbankDict[locus]["date"] = line.strip().replace('"',"").split("_date=",1)[1][-4:]
+        if search("isolation_source", line):
+            numberQuotMarks = int(line.count("\""))
+            genbankDict[locus]["source"] = line.strip().replace(";","").replace('"',"").split("_source=",1)[1]
+            continue
+        if numberQuotMarks == 1:
+            numberQuotMarks += int(line.count("\""))
+            genbankDict[locus]["source"] += " "
+            genbankDict[locus]["source"] += line.strip().replace(";","").replace('"',"")
+        if search("collection_date", line):
+            genbankDict[locus]["date"] = line.strip().replace('"',"").split("collection_date=",1)[1][-4:]
     return genbankDict
 
 
