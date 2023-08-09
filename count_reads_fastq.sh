@@ -3,8 +3,8 @@
 
 ### USAGE
 if [ $# -lt 1 ] ; then
-    echo "usage: count_reads.sh <directory> <output_file>"
-    echo -e "\ncount_fastq.sh is a script to counts the number of reads in FASTQ files"
+    echo "usage: count_reads_fastq.sh <directory> <output_file>"
+    echo -e "\ncount_reads_fastq.sh is a script to counts the number of reads in FASTQ files"
     echo -e "\narguments:"
     echo -e "\tdirectory\tDirectory where there is FASTQ files;"
     echo -e "\toutput_file\tOutput file where to write counts;"
