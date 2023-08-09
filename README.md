@@ -3,6 +3,7 @@
 - [bioinformatics-scripts](#bioinformatics-scripts)
   * [gbk2table.py](#gbk2table)
   * [frequency_alphabet.py](#frequency_alphabet)
+  * [count_reads_fastq.py](#count_reads_fastq)
   
 ## gbk2table.py
 
@@ -73,4 +74,17 @@ POSITION	 A	T	C	G	N	a	t	c	g	-
 8 	 0.0	0.0	1.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
 9 	 0.3333	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.6667
 10 	 0.0	1.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
+```
+
+## count_reads_fastq.py
+
+### Usage
+```
+usage: count_reads_fastq.sh <directory> <output_file>
+
+count_reads_fastq.sh is a script to counts the number of reads in FASTQ files
+
+arguments:
+	directory	Directory where there is FASTQ files;
+	output_file	Output file where to write counts;
 ```
