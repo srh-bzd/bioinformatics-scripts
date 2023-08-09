@@ -3,7 +3,7 @@
 - [bioinformatics-scripts](#bioinformatics-scripts)
   * [gbk2table.py](#gbk2table)
   * [frequency_alphabet.py](#frequency_alphabet)
-  * [count_reads_fastq.py](#count_reads_fastq)
+  * [count_reads_fastq.sh](#count_reads_fastq)
   
 ## gbk2table.py
 
@@ -76,7 +76,7 @@ POSITION	 A	T	C	G	N	a	t	c	g	-
 10 	 0.0	1.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
 ```
 
-## count_reads_fastq.py
+## count_reads_fastq.sh
 
 ### Usage
 ```
