@@ -16,7 +16,7 @@ fi
 # Directory where the FASTQ files are
 dir=$1
 # Output file
-output=$2
+output=$output
 
 
 ### VERIFICATIONS
@@ -34,38 +34,39 @@ fi
 
 ### PREPARATION
 # Write header into the output file
-echo -e "FASTQ_FILE\tNBR_READS" > "$2"
+echo -e "FASTQ_FILE\tNBR_READS" > "$output"
 
 
 ### COUNTS
 # For each FASTQ file gzip in the directory
-NBFASTQGZ=`ls -1 "${f}"/*fastq.gz 2>/dev/null | wc -l`
+NBFASTQGZ=`ls -1 "$dir"/*f*q.gz 2>/dev/null | wc -l`
 if [ ! $NBFASTQGZ = 0 ]
 then 
-	for file in "$dir"/*fastq.gz
+	for file in "$dir"/*f*q.gz
     do
         # Save the name of the file
         file_wo_path=${file##*/}
         # Print the name of the file into the output file
-        printf '%s\t' "$file_wo_path" >> "$2"
+        printf '%s\t' "$file_wo_path" >> "$output"
         # and print the results of count 
         lines="$(zcat -- "$file" | wc -l)"
-        bc <<< "$lines/4" >> "$2"
+        bc <<< "$lines/4" >> "$output"
     done
 fi 
 
 # For each FASTQ file not gzip in the directory
-NBFASTQWOGZ=`ls -1 "${f}"/*fastq 2>/dev/null | wc -l`
+NBFASTQWOGZ=`ls -1 "$dir"/*f*q 2>/dev/null | wc -l`
 if [ ! $NBFASTQWOGZ = 0 ]
 then 
-	for file in "$dir"/*fastq
+	for file in "$dir"/*f*q
     do
         # Save the name of the file
         file_wo_path=${file##*/}
         # Print the name of the file into the output file
-        printf '%s\t' "$file_wo_path" >> "$2"
+        printf '%s\t' "$file_wo_path" >> "$output"
         # and print the results of count 
         lines="$(cat -- "$file" | wc -l)"
-        bc <<< "$lines/4" >> "$2"
+        bc <<< "$lines/4" >> "$output"
     done
 fi 
+
