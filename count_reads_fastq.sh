@@ -16,7 +16,7 @@ fi
 # Directory where the FASTQ files are
 dir=$1
 # Output file
-output=$output
+output=$2
 
 
 ### VERIFICATIONS
